@@ -1,12 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { useState } from 'react'
-import HeaderLink from '../atom/HeaderLink'
+type Props = {
+  toggleNavBar: () => void
+}
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(true)
-
+const Header = (props: Props) => {
   return (
     <>
       <Head>
@@ -22,7 +21,7 @@ const Header = () => {
           </div>
           <div className='block lg:hidden'>
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={props.toggleNavBar()}
               className='flex items-center px-3 py-2 border rounded text-white border-white hover:text-secondary hover:border-secondary'
             >
               <svg
@@ -35,27 +34,6 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          {isOpen ? (
-            <div className='w-full block flex-grow lg:flex lg:items-center lg:w-auto'>
-              <div className='text-sm lg:flex-grow'>
-                <HeaderLink href='/' linkTitle='Docs' />
-                <HeaderLink href='/TopPage' linkTitle='Top Page' />
-                <HeaderLink href='/Quiz' linkTitle='Quiz' />
-              </div>
-              <div>
-                <Link href=''>
-                  <a
-                    href='#'
-                    className='inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0'
-                  >
-                    Sign in
-                  </a>
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
         </nav>
       </header>
     </>
